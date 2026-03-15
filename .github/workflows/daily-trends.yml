@@ -1,8 +1,6 @@
-name: Daily Trend Topics for Content Ideas
+name: Fetch Trend Topics on Demand
 
 on:
-  schedule:
-    - cron: '0 15 * * *'
   workflow_dispatch:
 
 jobs:
@@ -37,8 +35,9 @@ jobs:
             }
 
             const date = new Date().toISOString().split('T')[0];
-            let md = `# Daily Trend Topics - ${date}\n\n`;
-            md += `*Auto-updated every morning 7am PST via GitHub Actions*\n\n`;
+            const time = new Date().toUTCString();
+            let md = `# Trend Topics - Fetched ${date}\n\n`;
+            md += `*Last fetched: ${time}*\n\n`;
 
             const aiData = await fetchJSON(
               'https://www.reddit.com/r/artificial+ChatGPT+AItools/hot.json?limit=8'
@@ -61,18 +60,18 @@ jobs:
             }
 
             md += `---\n## How to Use\n`;
-            md += `1. Pick a topic above that excites you\n`;
+            md += `1. Pick a topic above\n`;
             md += `2. Open /prompts/ folder and copy the right template\n`;
             md += `3. Paste into Claude / ChatGPT / Gemini with your topic\n`;
             md += `4. Post on YouTube, Xiaohongshu, Reddit, or X\n`;
 
             fs.writeFileSync('topics/daily-trends.md', md);
-            console.log('Trends file written successfully!');
+            console.log('Done!');
 
       - name: Commit and push
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add topics/daily-trends.md
-          git diff --staged --quiet || git commit -m "Daily trends $(date '+%Y-%m-%d')"
+          git diff --staged --quiet || git commit -m "Trend topics fetched $(date '+%Y-%m-%d %H:%M')"
           git push
