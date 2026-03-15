@@ -1,67 +1,126 @@
-# X (Twitter) Post Prompt Template
+# 💰 理财副业内容模板 | Finance & Side Hustle Templates
 
-## X 平台特点
-- 观众属性：英语为主，全球商业人士、AI爱好者、创业者
-- 内容风格：简洁、直接、有观点、引发讨论
-- 最佳发布时间：上午 8-10点 / 下午 6-9点 (PST)
-- 主题标签：#AI #FinancialFreedom #Entrepreneur #SideHustle #AItools
-
-## X 帖子生成提示词
-
-请用 X (Twitter) 风格帮我写以下内容：
-
-**主题：** [在这里填入主题]
-**内容类型：** [单条推文 / 推文串 Thread]
+> 回到主页: [🤖 AI Prompt 图书馆](./README.md)
 
 ---
 
-### 类型 A：单条推文 (Single Tweet)
-- 字数限制：280字符以内
-- 公式：**限制性开头** + 核心观点 + **行动呼叫**
-- 适合：分享一个快速洞察、AI工具小技巧、财务小知识
+## Prompt 1：理财入门科普文章 | Finance 101 Article
 
-**示例格式：**
+**难度 Difficulty:** ⭐ 简单 Easy  
+**适用 AI:** Claude / ChatGPT  
+**用途 Use Case:** 将复杂理财知识写成普通人看得懂的内容
+
+### 🇨🇳 中文 Prompt
+
 ```
-[Hook - 限制性语句]
+你是一个善于用简单语言解释复杂金融概念的创作者。
 
-[1-2 句核心观点]
+请将以下理财主题写成一篇适合普通中国中产阶阅读的文章：
 
-[CTA - 一句话]
+**主题：** [填入主题]
+**目标读者：** [填入读者]
 
-#hashtag1 #hashtag2
+文章要求：
+1. 小学形式说明，用生活化比喻
+2. 包含3-5个具体可执行的建议
+3. 说明常见误区
+4. 语气躺和鼓励
+5. 小标题+emoji分割每个部分
+6. 结尾有转发或评论召唤
+
+词数：800-1200字
+```
+
+### 🇬🇧 English Prompt
+
+```
+You are a content creator skilled at explaining complex financial concepts simply.
+
+Write an article on this finance topic for middle-class Chinese readers:
+
+**Topic:** [Fill in topic]
+**Target reader:** [Fill in reader]
+
+Requirements:
+1. Explain like teaching a 5th grader, use everyday analogies
+2. Include 3-5 specific actionable tips
+3. Address common mistakes
+4. Warm and encouraging tone
+5. Sub-headings + emojis to break up sections
+6. End with call to share or comment
+
+Word count: 500-700 words
 ```
 
 ---
 
-### 类型 B：推文串 Thread (1/n 格式)
-- 每条不超过 280 字符
-- 建议 5-8 条
-- 适合：深度教学、步骤指南、完整故事
+## Prompt 2：副业项目可行性分析 | Side Hustle Feasibility Analysis
 
-**Thread 结构：**
+**难度 Difficulty:** ⭐⭐ 中级 Intermediate  
+**适用 AI:** Claude  
+**用途 Use Case:** 分析一个副业想法的可行性和潜在收入
+
+### 🇨🇳 中文 Prompt
+
 ```
-1/ [Hook - 吸引注意的开头]
+请帮我分析一个副业想法的可行性。
 
-2/ [背景/问题阵述]
+**副业项目：** [填入，例如：用AI帮小业主制作内容]
+**我的背景：** [填入，例如：全职上班，每周可用10-15小时]
+**我的资源：** [填入，例如：会用Claude，有一台电脑]
+**目标收入：** [填入，例如：每月额外茅3000-5000元]
 
-3-6/ [核心内容，每条一个要点]
+请帮我分析：
+1. 📊 市场需求
+2. 💰 收入潜力
+3. ⏰ 时间成本
+4. 🛠️ 工具与资源
+5. ⚠️ 主要风险
+6. ✅ 第一步行动计划
 
-7/ [总结 + 行动建议]
+最后给出你的总体评估。
+```
 
-8/ [CTA - Follow / Repost / 评论]
+### 🇬🇧 English Prompt
+
+```
+Help me analyze the feasibility of a side hustle idea.
+
+**Side hustle:** [Fill in]
+**My background:** [Fill in]
+**My resources:** [Fill in]
+**Income goal:** [Fill in]
+
+Please analyze:
+1. Market Demand
+2. Income Potential
+3. Time Investment
+4. Tools & Resources needed
+5. Main Risks
+6. First Action Plan this week
+
+End with overall recommendation.
 ```
 
 ---
 
-### 高赞标题公式：
-- “Most people don’t know [surprising fact]”
-- “I [achieved result] in [timeframe]. Here’s how:”
-- “[Number] AI tools that replace [expensive thing]:”
-- “Stop [bad habit]. Start [good habit] instead.”
+## 📊 理财副业小贴士 | Finance Tips
 
-### 要求：
-- 全文用英语
-- 风格自信、直接、有观点
-- 每条必须有跑起来的 Hook
-- 结尾要有行动呼叫 (Follow / Repost / Comment)
-- 加 2-3 个相关 hashtag
+| 原则 | 中文 | English |
+|---|---|---|
+| 先学后做 | 了解毕再投入 | Research before investing |
+| 分散风险 | 不把鸡蛋放一个篮 | Don't put all eggs in one basket |
+| 长期思维 | 副业需要时3-6个月 | Side hustles need 3-6 months |
+| 小量开始 | 先小试，再扩大 | Start small, then scale |
+
+---
+
+## 📅 我的学习记录 | My Learning Log
+
+| 日期 | 我学到了什么 | 结果 |
+|---|---|---|
+| 2026-03-15 | 创建这个模板 | ✅ 完成 |
+
+---
+
+[← 返回图书馆首页 | Back to Library](./README.md)
