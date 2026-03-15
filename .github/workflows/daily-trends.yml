@@ -15,63 +15,64 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create trends report
-        run: |
-          DATE=$(date '+%Y-%m-%d')
-          FILE="topics/daily-trends.md"
+      - name: Fetch Reddit trends and save to file
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const https = require('https');
+            const fs = require('fs');
 
-          echo "# Daily Trend Topics - $DATE" > $FILE
-          echo "" >> $FILE
-          echo "*Auto-updated every morning 7am PST via GitHub Actions*" >> $FILE
-          echo "" >> $FILE
+            function fetchJSON(url) {
+              return new Promise((resolve) => {
+                const options = { headers: { 'User-Agent': 'ContentBot/1.0' } };
+                https.get(url, options, (res) => {
+                  let data = '';
+                  res.on('data', chunk => data += chunk);
+                  res.on('end', () => {
+                    try { resolve(JSON.parse(data)); }
+                    catch { resolve({ data: { children: [] } }); }
+                  });
+                }).on('error', () => resolve({ data: { children: [] } }));
+              });
+            }
 
-          echo "## AI Tools Trending on Reddit" >> $FILE
-          echo "" >> $FILE
-          curl -sf -A "Mozilla/5.0" \
-            "https://www.reddit.com/r/artificial+ChatGPT+AItools/hot.json?limit=8" \
-            -o /tmp/ai_reddit.json || echo '{"data":{"children":[]}}' > /tmp/ai_reddit.json
-          python3 << 'PYEOF'
-import json
-with open('/tmp/ai_reddit.json') as f:
-    data = json.load(f)
-posts = data.get('data', {}).get('children', [])
-with open('topics/daily-trends.md', 'a') as out:
-    for i, p in enumerate(posts[:8], 1):
-        d = p['data']
-        out.write(f"{i}. **{d['title']}**\n")
-        out.write(f"   - {d['score']} upvotes | r/{d['subreddit']}\n\n")
-PYEOF
+            const date = new Date().toISOString().split('T')[0];
+            let md = `# Daily Trend Topics - ${date}\n\n`;
+            md += `*Auto-updated every morning 7am PST via GitHub Actions*\n\n`;
 
-          echo "" >> $FILE
-          echo "## Finance & Side Hustle Trending on Reddit" >> $FILE
-          echo "" >> $FILE
-          curl -sf -A "Mozilla/5.0" \
-            "https://www.reddit.com/r/personalfinance+financialindependence+Entrepreneur/hot.json?limit=6" \
-            -o /tmp/finance_reddit.json || echo '{"data":{"children":[]}}' > /tmp/finance_reddit.json
-          python3 << 'PYEOF2'
-import json
-with open('/tmp/finance_reddit.json') as f:
-    data = json.load(f)
-posts = data.get('data', {}).get('children', [])
-with open('topics/daily-trends.md', 'a') as out:
-    for i, p in enumerate(posts[:6], 1):
-        d = p['data']
-        out.write(f"{i}. **{d['title']}**\n")
-        out.write(f"   - {d['score']} upvotes | r/{d['subreddit']}\n\n")
-PYEOF2
+            const aiData = await fetchJSON(
+              'https://www.reddit.com/r/artificial+ChatGPT+AItools/hot.json?limit=8'
+            );
+            md += `## AI Tools Trending on Reddit\n\n`;
+            for (const [i, post] of (aiData.data?.children || []).slice(0, 8).entries()) {
+              const d = post.data;
+              md += `${i+1}. **${d.title}**\n`;
+              md += `   - ${d.score} upvotes | r/${d.subreddit}\n\n`;
+            }
 
-          echo "" >> $FILE
-          echo "---" >> $FILE
-          echo "## How to Use" >> $FILE
-          echo "1. Pick a topic above that excites you" >> $FILE
-          echo "2. Open /prompts/ folder, copy the right template" >> $FILE
-          echo "3. Paste into Claude / ChatGPT / Gemini with your topic" >> $FILE
-          echo "4. Post on YouTube, Xiaohongshu, Reddit, or X" >> $FILE
+            const finData = await fetchJSON(
+              'https://www.reddit.com/r/personalfinance+financialindependence+Entrepreneur/hot.json?limit=6'
+            );
+            md += `## Finance & Side Hustle Trending on Reddit\n\n`;
+            for (const [i, post] of (finData.data?.children || []).slice(0, 6).entries()) {
+              const d = post.data;
+              md += `${i+1}. **${d.title}**\n`;
+              md += `   - ${d.score} upvotes | r/${d.subreddit}\n\n`;
+            }
 
-      - name: Commit trends file
+            md += `---\n## How to Use\n`;
+            md += `1. Pick a topic above that excites you\n`;
+            md += `2. Open /prompts/ folder and copy the right template\n`;
+            md += `3. Paste into Claude / ChatGPT / Gemini with your topic\n`;
+            md += `4. Post on YouTube, Xiaohongshu, Reddit, or X\n`;
+
+            fs.writeFileSync('topics/daily-trends.md', md);
+            console.log('Trends file written successfully!');
+
+      - name: Commit and push
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add topics/daily-trends.md
-          git diff --staged --quiet || git commit -m "Daily trends $( date '+%Y-%m-%d' )"
+          git diff --staged --quiet || git commit -m "Daily trends $(date '+%Y-%m-%d')"
           git push
