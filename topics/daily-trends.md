@@ -1,14 +1,14 @@
-# Daily Trend Topics - 2026-03-15
+# 每日热门话题 - 2026-03-15
 
-*Auto-updated every morning 7am PST via GitHub Actions*
+*每天早上 7 点（美西时间）通过 GitHub Actions 自动更新*
 
-## AI Tools Trending on Reddit
+## Reddit 上的 AI 工具热门话题
 
-## Finance & Side Hustle Trending on Reddit
+## Reddit 上的理财 & 副业热门话题
 
 ---
-## How to Use
-1. Pick a topic above that excites you
-2. Open /prompts/ folder and copy the right template
-3. Paste into Claude / ChatGPT / Gemini with your topic
-4. Post on YouTube, Xiaohongshu, Reddit, or X
+## 使用方法
+1. 从上面挑一个让你感兴趣的话题
+2. 打开 /prompts/ 文件夹，复制对应的模板
+3. 把话题粘贴进 Claude / ChatGPT / Gemini
+4. 发布到 YouTube、小红书、Reddit 或 X
