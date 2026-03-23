@@ -1,0 +1,6 @@
+.github/workflows/
+   auto-content.yml
+   auto-organize.yml
+   auto-rename.yml
+   auto-index.yml
+
